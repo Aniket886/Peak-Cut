@@ -34,3 +34,4 @@ venv/
 build/
 dist/
 *.spec
+!PeakCut-Setup-and-Run.bat

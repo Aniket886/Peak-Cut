@@ -25,3 +25,17 @@ Copy-Item README.md, LICENSE "dist\PeakCut\" -ErrorAction SilentlyContinue
 
 Compress-Archive -Path "dist\PeakCut" -DestinationPath "dist\PeakCut-Windows.zip" -Force
 Write-Host "Done: dist\PeakCut-Windows.zip"
+
+# The installer is made too when Inno Setup is installed (winget install JRSoftware.InnoSetup)
+$iscc = (Get-Command iscc -ErrorAction SilentlyContinue).Source
+if (-not $iscc) {
+    $iscc = @("$env:LOCALAPPDATA\Programs\Inno Setup 6\ISCC.exe", "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe") |
+        Where-Object { Test-Path $_ } | Select-Object -First 1
+}
+if ($iscc) {
+    & $iscc launcher\PeakCut.iss
+    if ($LASTEXITCODE -ne 0) { throw "Inno Setup failed" }
+    Write-Host "Done: dist\PeakCut-Setup.exe"
+} else {
+    Write-Host "Inno Setup not found, so only the zip was made."
+}
