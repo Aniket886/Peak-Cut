@@ -279,16 +279,10 @@ Clip videos you made, or have permission to use. You are responsible for the rig
 post, and for following the terms of the sites you fetch from and post to. Game footage and trailers often belong to
 the publisher, so check their content policy before you post clips.
 
-## Credits and license
+## License
 
-PeakCut is maintained by [Aniket886](https://github.com/Aniket886). It is a fork of
-[PeakCut](https://github.com/haziqahmedqasmi/PeakCut) and is released under the [MIT license](LICENSE). The original
-copyright notice is kept, as the license requires, and a line for this fork's changes is added.
-
-**What this fork changes:** the look (a cobalt and slate colour scheme, a light sidebar and a new logo), the project
-links and update check (they point to this repository), the Windows app and installer, and the removal of the original
-author's "Follow me" button. The clip pipeline, live recording, accounts and everything else are the original
-project's work.
+PeakCut is created and maintained by [Aniket886](https://github.com/Aniket886) and released under the
+[MIT license](LICENSE).
 
 Caption fonts in `studio/fonts/` (Anton, Archivo Black, Poppins) are under the SIL Open Font License; the license
 texts are in the same folder.
