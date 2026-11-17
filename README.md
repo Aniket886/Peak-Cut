@@ -19,7 +19,8 @@ Maintained by [Aniket886](https://github.com/Aniket886). Built on the open sourc
 ## Contents
 
 - [How it works](#how-it-works)
-- [Quick start](#quick-start)
+- [Download for Windows](#download-for-windows)
+- [Quick start (from source)](#quick-start-from-source)
 - [Choose your AI](#choose-your-ai)
 - [Design](#design)
 - [Settings](#settings)
@@ -50,7 +51,27 @@ highlights as they happen, using loudness, chat activity and the transcript.
 
 **Workspaces per creator.** Each creator has their own channels, clip settings, posting rules and activity log.
 
-## Quick start
+## Download for Windows
+
+The easiest way to use PeakCut. Nothing else to install: Python and ffmpeg are included.
+
+1. Go to the [latest release](https://github.com/Aniket886/Peak-Cut/releases/latest) and download
+   **PeakCut-Setup.exe** (the installer, recommended) or **PeakCut-Windows.zip** (no install: extract it and run
+   `PeakCut.exe`).
+2. Run it. If Windows shows a blue SmartScreen warning, choose **More info**, then **Run anyway**. The program is not
+   code-signed yet. The installer needs no administrator password.
+3. Start **PeakCut** from the Start menu (or run `PeakCut.exe`). A black window opens; keep it open while you use
+   PeakCut and close it to stop. The first start downloads the speech model once (about 480 MB), then PeakCut opens
+   in your browser at http://127.0.0.1:8765.
+4. In **Settings, AI**, paste an AI key (optional, see [Choose your AI](#choose-your-ai)). Then paste a link or
+   upload a video.
+
+Your videos, clips and settings are kept in `%LOCALAPPDATA%\PeakCut\data`. Uninstalling does not delete them.
+
+Prefer the source? Double-click `PeakCut-Setup-and-Run.bat`. It installs Python and ffmpeg if they are missing, sets
+up everything, and starts PeakCut. Run it a second time if it asks you to.
+
+## Quick start (from source)
 
 You need Python 3.10 or newer and `ffmpeg` on your PATH.
 
