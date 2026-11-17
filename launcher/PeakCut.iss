@@ -12,7 +12,9 @@
 AppId={{6B1F4E0A-3C52-4D8B-9A7E-5C0D2F8A41B7}
 AppName={#AppName}
 AppVersion={#AppVersion}
-AppPublisher=PeakCut
+AppPublisher=Aniket886
+VersionInfoVersion={#AppVersion}
+VersionInfoProductName={#AppName}
 AppPublisherURL=https://github.com/Aniket886/Peak-Cut
 DefaultDirName={autopf}\{#AppName}
 DefaultGroupName={#AppName}

@@ -12,7 +12,7 @@ $fp = (Get-Command ffprobe -ErrorAction SilentlyContinue).Source
 if (-not $ff -or -not $fp) { throw "ffmpeg and ffprobe must be installed and on PATH to build (winget install Gyan.FFmpeg)." }
 
 Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
-& $py -m PyInstaller --noconfirm --clean --name PeakCut --console --icon launcher\peakcut.ico `
+& $py -m PyInstaller --noconfirm --clean --name PeakCut --console --icon launcher\peakcut.ico --version-file launcher\version_info.txt `
     --collect-submodules uvicorn --collect-submodules studio `
     --collect-all sherpa_onnx --collect-all yt_dlp `
     --add-data "web;web" --add-data "studio\fonts;studio\fonts" `
