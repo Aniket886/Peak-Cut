@@ -1,0 +1,17 @@
+# The Vercel project only serves the "site" folder, so nothing else needs to be uploaded.
+data/
+dist/
+build/
+.venv/
+venv/
+.git/
+studio/
+tests/
+web/
+launcher/
+deploy/
+*.exe
+*.zip
+*.db
+.env
+.env.*
