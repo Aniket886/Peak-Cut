@@ -1,87 +1,84 @@
-<p align="center">
-  <img src="web/brand/logo.svg" alt="Peak Cut" height="56">
-</p>
+<div align="center">
 
-<p align="center">
-  Turn long videos and live streams into captioned vertical clips, ready to post.<br>
-  Free and open source. Runs on your own computer, with your own AI key (optional).
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="web/brand/logo-light.svg">
+  <img src="web/brand/logo.svg" alt="PeakCut" height="64">
+</picture>
 
----
+<br><br>
 
-Paste a YouTube, Twitch or Kick link (or upload a file) and Peak Cut finds the moments worth clipping, cuts them to
-9:16, adds word-by-word captions and a hook, and can post them to your connected accounts. It can also record a
-creator's live stream and clip the highlights while the stream is still running.
+### Long videos in. Ready-to-post clips out.
 
-Maintained by [Aniket886](https://github.com/Aniket886). Built on the open source
-[PeakCut](https://github.com/haziqahmedqasmi/PeakCut) project (see [Credits](#credits-and-license)).
+PeakCut finds the best moments in a video or live stream, cuts them to vertical 9:16<br>
+with word-by-word captions and a hook, and can post them for you.<br>
+**Free, open source, and it runs on your own computer.**
 
-## Contents
+<br>
 
-- [How it works](#how-it-works)
-- [Download for Windows](#download-for-windows)
-- [Quick start (from source)](#quick-start-from-source)
-- [Choose your AI](#choose-your-ai)
-- [Design](#design)
-- [Settings](#settings)
-- [How it is built](#how-it-is-built)
-- [Deploy](#deploy) · [Tests](#tests) · [Security](#security)
-- [Credits and license](#credits-and-license)
+[![Latest release](https://img.shields.io/github/v/release/Aniket886/Peak-Cut?style=flat-square&color=2F6BFF&label=release)](https://github.com/Aniket886/Peak-Cut/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0E1726?style=flat-square)](LICENSE)
+![Platform](https://img.shields.io/badge/platform-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-5A6577?style=flat-square)
+![Python](https://img.shields.io/badge/python-3.10%2B-5A6577?style=flat-square)
 
-## How it works
+[**Download for Windows**](https://github.com/Aniket886/Peak-Cut/releases/latest) &nbsp;·&nbsp;
+[Website](https://peak-cut-henna.vercel.app) &nbsp;·&nbsp;
+[Run from source](#run-from-source) &nbsp;·&nbsp;
+[Deploy a server](DEPLOY.md)
 
-```
-Paste a link or upload  ->  Download  ->  Transcribe  ->  Pick moments  ->  Render  ->  Review  ->  Download or post
-      (Home page)          (yt-dlp)     (on your PC)    (AI or loudness)   (ffmpeg)    (clips)
-```
+<br>
 
-1. **Add a video.** Paste a YouTube, Twitch or Kick link on the Home page, or drop in a file. Several videos can run
-   at once; each person's videos wait in their own line.
-2. **Transcribe.** Speech to text runs on your own machine, so audio never leaves it.
-3. **Pick the moments.** With an AI key, a model reads the transcript and chooses moments that would hold a stranger's
-   attention, then writes a hook and a title. With no key, clips are picked by loudness instead (shouting, big
-   reactions, explosions), which still works but is less precise.
-4. **Render.** Each moment is cut to 9:16 with word-by-word captions in one of three styles.
-5. **Review.** Clips appear under **All videos**, or under the creator they belong to. Preview, rename or delete them.
-6. **Download or post.** Save the clips, or connect YouTube, Instagram and TikTok and queue or auto-post them, with
-   spacing and daily caps (one-time setup in [DEPLOY.md](DEPLOY.md#connecting-youtube-instagram-and-tiktok)).
+<table>
+  <tr>
+    <td align="center"><img src="web/brand/demo-hype.jpg" width="200" alt="Hype caption style"><br><sub><b>Hype</b></sub></td>
+    <td align="center"><img src="web/brand/demo-bounce.jpg" width="200" alt="Bounce caption style"><br><sub><b>Bounce</b></sub></td>
+    <td align="center"><img src="web/brand/demo-clean.jpg" width="200" alt="Clean caption style"><br><sub><b>Clean</b></sub></td>
+  </tr>
+</table>
 
-**Live clipping.** Add a creator, press **Go live**, and Peak Cut records the stream into a rolling buffer and clips
-highlights as they happen, using loudness, chat activity and the transcript.
+</div>
 
-**Workspaces per creator.** Each creator has their own channels, clip settings, posting rules and activity log.
+<br>
 
-## Download for Windows
+## Features
 
-The easiest way to use PeakCut. Nothing else to install: Python and ffmpeg are included.
+|   |   |
+|---|---|
+| **Finds the moments** | An AI model reads the transcript and picks moments that hold attention, then writes a hook and a title. No AI key? It falls back to loudness (shouting, big reactions). |
+| **Captions that move** | Word-by-word captions in three styles, cut to 9:16 and ready for Shorts, Reels and TikTok. |
+| **Live clipping** | Press **Go live** on a creator and PeakCut records the stream and clips highlights while it is still running. |
+| **Posts for you** | Connect YouTube, Instagram and TikTok, then queue or auto-post with spacing and daily caps. |
+| **Private by default** | Speech to text runs on your machine, so audio never leaves it. Your AI key stays in your own data folder. |
+| **Bring your own AI** | Gemini, OpenAI, Grok, Groq, OpenRouter, Claude, a local Ollama model, or any OpenAI-compatible address. |
 
-1. Go to the [latest release](https://github.com/Aniket886/Peak-Cut/releases/latest) and download
-   **PeakCut-Setup.exe** (the installer, recommended) or **PeakCut-Windows.zip** (no install: extract it and run
-   `PeakCut.exe`).
-2. Run it. If Windows shows a blue SmartScreen warning, choose **More info**, then **Run anyway**. The program is not
-   code-signed yet. The installer needs no administrator password.
-3. Start **PeakCut** from the Start menu (or run `PeakCut.exe`). A black window opens; keep it open while you use
-   PeakCut and close it to stop. The first start downloads the speech model once (about 480 MB), then PeakCut opens
-   in your browser at http://127.0.0.1:8765.
-4. In **Settings, AI**, paste an AI key (optional, see [Choose your AI](#choose-your-ai)). Then paste a link or
-   upload a video.
+<br>
 
-Your videos, clips and settings are kept in `%LOCALAPPDATA%\PeakCut\data`. Uninstalling does not delete them.
+## Get started
 
-Prefer the source? Double-click `PeakCut-Setup-and-Run.bat`. It installs Python and ffmpeg if they are missing, sets
-up everything, and starts PeakCut. Run it a second time if it asks you to.
+### Windows (recommended)
 
-## Quick start (from source)
+Nothing else to install. Python and ffmpeg are included.
+
+1. Download **`PeakCut-Setup.exe`** from the [latest release](https://github.com/Aniket886/Peak-Cut/releases/latest).
+   Prefer no installer? Take **`PeakCut-Windows.zip`**, extract it and run `PeakCut.exe`.
+2. Run it. The installer needs no administrator password.
+3. Start **PeakCut** from the Start menu. A black window opens; keep it open while you work and close it to stop.
+   The first start downloads the speech model once (about 480 MB), then PeakCut opens at <http://127.0.0.1:8765>.
+4. Open **Settings, AI**, paste an AI key (optional), then paste a video link or upload a file.
+
+> [!NOTE]
+> Windows may show a blue **SmartScreen** warning because the program is not code-signed yet. Choose **More info**,
+> then **Run anyway**.
+
+Your videos, clips and settings live in `%LOCALAPPDATA%\PeakCut\data`. Uninstalling does not delete them.
+
+### Run from source
 
 You need Python 3.10 or newer and `ffmpeg` on your PATH.
 
-On Windows, install ffmpeg once:
+**Windows, one step:** double-click [`PeakCut-Setup-and-Run.bat`](PeakCut-Setup-and-Run.bat). It installs Python and
+ffmpeg if they are missing, sets everything up and starts PeakCut. If it asks, run it a second time.
 
-```bash
-winget install --id Gyan.FFmpeg -e
-```
-
-Then, in the project folder:
+**Any system:**
 
 ```bash
 git clone https://github.com/Aniket886/Peak-Cut.git
@@ -97,10 +94,30 @@ python -m studio.fetch_model
 python -m studio.server
 ```
 
-`fetch_model` downloads the speech model once (about 480 MB). Open http://127.0.0.1:8765. There is no sign-in on your
-own computer: it opens straight into the dashboard.
+Open <http://127.0.0.1:8765>. There is no sign-in on your own computer. To start it again later, activate the
+environment and run `python -m studio.server`. On Windows, install ffmpeg with `winget install --id Gyan.FFmpeg -e`.
 
-To start it again later, activate the environment and run `python -m studio.server`.
+<br>
+
+## How it works
+
+```text
+Add a video  →  Download  →  Transcribe  →  Pick moments  →  Render  →  Review  →  Save or post
+ (link/file)    (yt-dlp)    (on your PC)   (AI or loudness)  (ffmpeg)   (clips)
+```
+
+1. **Add a video.** Paste a YouTube, Twitch or Kick link, or drop in a file. Several videos run at once.
+2. **Transcribe.** Speech to text runs locally with `sherpa-onnx` and the Parakeet model.
+3. **Pick the moments.** With an AI key, a model chooses the moments and writes hooks and titles. Without one, clips
+   are chosen by loudness.
+4. **Render.** Each moment is cut to 9:16 with captions.
+5. **Review.** Preview, rename or delete clips under **All videos**, or under the creator they belong to.
+6. **Save or post.** Download the clips, or post them to connected accounts
+   ([one-time setup](DEPLOY.md#connecting-youtube-instagram-and-tiktok)).
+
+Each creator has their own workspace: channels, clip settings, posting rules and an activity log.
+
+<br>
 
 ## Choose your AI
 
@@ -108,9 +125,25 @@ The AI is optional. Without a key, clips are chosen by loudness. With one, they 
 which is usually better for gameplay and commentary.
 
 The easy way is in the dashboard: **Settings, AI**. Pick the service, paste your key, press **Find models**, then
-**Save and test**. The key is kept in the data folder on your machine and is never shown again.
+**Save and test**. The key stays in the data folder on your machine and is never shown again.
 
-If you prefer a file (or run a server), the same three things can go in `.env`. What is saved in the dashboard wins:
+| Provider | `PEAKCUT_AI_PROVIDER` | Get a key |
+|---|---|---|
+| Google Gemini | `gemini` | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+| OpenAI | `openai` | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
+| Grok (xAI) | `xai` | [console.x.ai](https://console.x.ai) |
+| Groq | `groq` | [console.groq.com/keys](https://console.groq.com/keys) |
+| OpenRouter | `openrouter` | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| Claude | `anthropic` | [console.anthropic.com](https://console.anthropic.com) |
+| Ollama (local, no key) | `ollama` | [ollama.com](https://ollama.com) |
+| Any OpenAI-compatible address | `custom` | also set `PEAKCUT_AI_BASE_URL` |
+
+<details>
+<summary><b>Configure with a file instead</b></summary>
+
+<br>
+
+The same settings can go in `.env`. What is saved in the dashboard wins.
 
 ```ini
 PEAKCUT_AI_PROVIDER=gemini
@@ -118,25 +151,71 @@ PEAKCUT_AI_MODELS=gemini-2.5-flash
 PEAKCUT_AI_KEY=your-key-here
 ```
 
-| `PEAKCUT_AI_PROVIDER` | Service | Where to get a key |
-|---|---|---|
-| `gemini` | Google Gemini | https://aistudio.google.com/apikey |
-| `openai` | OpenAI | https://platform.openai.com/api-keys |
-| `xai` | Grok (xAI) | https://console.x.ai |
-| `groq` | Groq | https://console.groq.com/keys |
-| `openrouter` | OpenRouter (many models, one key) | https://openrouter.ai/keys |
-| `anthropic` | Claude | https://console.anthropic.com |
-| `ollama` | A model on your own machine, no key | https://ollama.com |
-| `custom` | Any OpenAI-compatible address: also set `PEAKCUT_AI_BASE_URL` | |
-
 - `PEAKCUT_AI_MODELS` is the model id exactly as the service names it. Several ids separated by commas are tried in
   order, which gives you a fallback.
 - A fast, inexpensive model is the right choice. A one-hour video is read in about four requests.
 - You pay the AI service directly. The **AI usage** page shows the requests and tokens each video took.
 
-## Design
+</details>
 
-Peak Cut has a light, quiet interface: the colour is kept for actions and state, and everything else stays neutral.
+<br>
+
+## Settings
+
+Everything is set through environment variables, normally in a `.env` file next to this README.
+[`.env.example`](.env.example) lists every setting with a short explanation. The ones that matter first:
+
+| Setting | What it is for |
+|---|---|
+| `PEAKCUT_AI_PROVIDER`, `PEAKCUT_AI_MODELS`, `PEAKCUT_AI_KEY` | The AI that picks clips and writes titles (or set it in the dashboard) |
+| `PEAKCUT_ACCOUNTS` | `1` makes everyone sign in. Use it on any server other people can reach |
+| `PEAKCUT_DATA` | Where videos, clips and the database are kept (default `./data`) |
+| `PEAKCUT_REPO_URL`, `PEAKCUT_FOLLOW_URL` | The links at the top of the dashboard. Empty hides a button |
+| `PEAKCUT_UPDATE_REPO`, `PEAKCUT_UPDATE_CHECK` | Which repository the update notice watches, and `0` to turn it off |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Optional: Sign in with Google, and connecting YouTube |
+| `PEAKCUT_SMTP_*`, `PEAKCUT_MAIL_FROM` | Optional: confirmation and password emails |
+
+`.env`, the `secrets/` folder and all user data are ignored by git. Keep keys there, never in the code.
+
+<br>
+
+## Under the hood
+
+| Part | What it is |
+|---|---|
+| `studio/` | The server: FastAPI, the clip pipeline, live recording, accounts |
+| `studio/ai.py` | The only file that talks to an AI service. Add a provider here |
+| `web/` | The pages: landing, sign-in, the app, the admin dashboard (plain HTML, CSS and JavaScript, no build step) |
+| `launcher/` | The Windows program and installer: PyInstaller build, Inno Setup script, icon |
+| `site/` | The download website, deployed to Vercel |
+| `tests/` | Tests that run against a throwaway copy of the app |
+| `deploy/`, `Dockerfile`, `docker-compose.yml` | One-server deployment with PostgreSQL and automatic HTTPS |
+
+Video work is done with `ffmpeg` and `yt-dlp`. Data is kept per user: accounts in the database (SQLite on your own
+computer, PostgreSQL on a server), videos and clips in each user's own folder. [AGENTS.md](AGENTS.md) is a short map
+of the code for contributors.
+
+<details>
+<summary><b>Admins and load handling</b></summary>
+
+<br>
+
+**Admins.** Only matters with accounts on (`PEAKCUT_ACCOUNTS=1`); without them you are the owner. Grant a role on the
+machine that runs PeakCut: `python -m studio.admin grant you@example.com` (`revoke` and `list` work the same way).
+The admin dashboard is at `/admin`.
+
+**Under load.** Each person's videos wait in their own line and the lines take turns. The server measures its own
+processor, memory and disk, and starts extra videos and recordings only while there is room. There are no limits on
+upload size, video length or storage unless you set them in `.env`.
+
+</details>
+
+<details>
+<summary><b>Design system</b></summary>
+
+<br>
+
+A light, quiet interface: colour is kept for actions and state, and everything else stays neutral.
 
 | Token | Value | Used for |
 |---|---|---|
@@ -148,59 +227,30 @@ Peak Cut has a light, quiet interface: the colour is kept for actions and state,
 | Line | `#E8EBF0` | Borders and dividers |
 
 - **Type:** Geist for the interface, with slightly tightened headings.
-- **Layout:** a light sidebar, a white work area with a hairline border, and large corner radii only on big panels.
-- **Logo:** a peak with a cut through it, next to a Poppins ExtraBold wordmark. Files are in `web/brand/`
-  (`logo.svg`, `logo-light.svg`, `favicon.svg`, and `logo-email.png` for email apps).
-- **Pages** are plain HTML, CSS and JavaScript with no build step. The colours are variables at the top of each page
-  (`--brand`, `--frame`, `--text`, ...), so a new theme is a small edit.
+- **Logo:** a peak with a cut through it, next to a Poppins ExtraBold wordmark. Files are in `web/brand/`.
+- **Themes:** the colours are variables at the top of each page (`--brand`, `--frame`, `--text`, ...), so a new theme
+  is a small edit.
 
-## Settings
+</details>
 
-Everything is set through environment variables, normally in a `.env` file next to this README.
-[`.env.example`](.env.example) lists every setting with a short explanation. The ones that matter first:
+<br>
 
-| Setting | What it is for |
-|---|---|
-| `PEAKCUT_AI_PROVIDER`, `PEAKCUT_AI_MODELS`, `PEAKCUT_AI_KEY` | The AI that picks clips and writes titles (or set it in the dashboard) |
-| `PEAKCUT_ACCOUNTS` | `1` makes everyone sign in. Use it on any server other people can reach |
-| `PEAKCUT_REPO_URL`, `PEAKCUT_FOLLOW_URL` | The links at the top of the dashboard. Empty hides a button |
-| `PEAKCUT_UPDATE_REPO`, `PEAKCUT_UPDATE_CHECK` | Which repository the update notice watches, and `0` to turn it off |
-| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Optional: Sign in with Google, and connecting YouTube |
-| `PEAKCUT_SMTP_*`, `PEAKCUT_MAIL_FROM` | Optional: confirmation and password emails |
-| `PEAKCUT_DATA` | Where videos, clips and the database are kept (default `./data`) |
+## Deploy a server
 
-`.env`, the `secrets/` folder and all user data are ignored by git. Keep keys there, never in the code.
-
-## How it is built
-
-| Part | What it is |
-|---|---|
-| `studio/` | The server: FastAPI, the clip pipeline, live recording, accounts |
-| `studio/ai.py` | The only file that talks to an AI service. Add a provider here |
-| `web/` | The pages: landing, sign-in, the app, the admin dashboard |
-| `tests/` | Tests that run against a throwaway copy of the app |
-| `deploy/`, `Dockerfile`, `docker-compose.yml` | One-server deployment with PostgreSQL and automatic HTTPS |
-
-Video work is done with `ffmpeg` and `yt-dlp`. Speech is transcribed with `sherpa-onnx` and the Parakeet model.
-Data is kept per user: accounts in the database (SQLite on your own computer, PostgreSQL on a server), videos and
-clips in each user's own folder. [AGENTS.md](AGENTS.md) is a short map of the code for contributors and AI coding
-assistants.
-
-**Admins.** Only matters with accounts on (`PEAKCUT_ACCOUNTS=1`); without them you are the owner. Grant a role on the
-machine that runs Peak Cut: `python -m studio.admin grant you@example.com` (`revoke` and `list` work the same way).
-The admin dashboard is at `/admin`.
-
-**Under load.** Each person's videos wait in their own line and the lines take turns. The server measures its own
-processor, memory and disk, and starts extra videos and recordings only while there is room. There are no limits on
-upload size, video length or storage unless you set them in `.env`.
-
-## Deploy
-
-[DEPLOY.md](DEPLOY.md) walks through a single server with Docker: the app, PostgreSQL, and Caddy for HTTPS.
+[DEPLOY.md](DEPLOY.md) walks through a single Linux server with Docker: the app, PostgreSQL, and Caddy for HTTPS.
 
 ```bash
 docker compose up -d --build
 ```
+
+## Build the Windows installer
+
+```powershell
+powershell -ExecutionPolicy Bypass -File launcher\build.ps1
+```
+
+This makes `dist\PeakCut-Windows.zip`, and `dist\PeakCut-Setup.exe` when [Inno Setup](https://jrsoftware.org/isinfo.php)
+is installed. It needs `ffmpeg` and `ffprobe` on your PATH.
 
 ## Tests
 
@@ -212,16 +262,18 @@ This starts a copy of the app on a spare port with an empty temporary data folde
 It needs no keys and never touches real data. On Windows, set `PYTHONUTF8=1` first so the Hindi and Urdu caption test
 can print its results.
 
+<br>
+
 ## Security
 
-- With sign-in off, Peak Cut listens on this computer only (`127.0.0.1`) and refuses changes sent by other websites.
+- With sign-in off, PeakCut listens on this computer only (`127.0.0.1`) and refuses changes sent by other websites.
   Do not expose it to the internet that way: turn accounts on.
 - Passwords are stored only as salted scrypt hashes. Sessions are random tokens stored hashed; cookies are HTTP-only.
 - Every route works out who is asking from the session, never from the request, so users only reach their own data.
 - Only known video sites are fetched, and text from videos is treated as data when it is shown to the AI.
 - Found a problem? Report it privately through the repository's security advisories instead of a public issue.
 
-## Using it responsibly
+## Use it responsibly
 
 Clip videos you made, or have permission to use. You are responsible for the rights to what you download, clip and
 post, and for following the terms of the sites you fetch from and post to. Game footage and trailers often belong to
@@ -229,13 +281,14 @@ the publisher, so check their content policy before you post clips.
 
 ## Credits and license
 
-Peak Cut is a fork of [PeakCut](https://github.com/haziqahmedqasmi/PeakCut) and is released under the
-[MIT license](LICENSE). The original copyright notice is kept, as the license requires, and a line for this fork's
-changes is added.
+PeakCut is maintained by [Aniket886](https://github.com/Aniket886). It is a fork of
+[PeakCut](https://github.com/haziqahmedqasmi/PeakCut) and is released under the [MIT license](LICENSE). The original
+copyright notice is kept, as the license requires, and a line for this fork's changes is added.
 
 **What this fork changes:** the look (a cobalt and slate colour scheme, a light sidebar and a new logo), the project
-links and update check (they point to this repository), and the removal of the original author's "Follow me" button.
-The clip pipeline, live recording, accounts and everything else are the original project's work.
+links and update check (they point to this repository), the Windows app and installer, and the removal of the original
+author's "Follow me" button. The clip pipeline, live recording, accounts and everything else are the original
+project's work.
 
 Caption fonts in `studio/fonts/` (Anton, Archivo Black, Poppins) are under the SIL Open Font License; the license
 texts are in the same folder.
