@@ -1,0 +1,64 @@
+# Builds the Windows program on GitHub's servers, so the signed file can be traced back to this source code.
+# Push a tag such as v1.0.2 to run it. Signing is off until SignPath approves the project (see "Signing" below).
+name: Windows release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install ffmpeg and Inno Setup
+        shell: powershell
+        run: |
+          choco install ffmpeg innosetup -y --no-progress
+      - name: Build the program, zip and installer
+        shell: powershell
+        run: |
+          $env:Path += ";C:\Program Files (x86)\Inno Setup 6"
+          powershell -ExecutionPolicy Bypass -File launcher\build.ps1
+      - name: Keep the build
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: PeakCut-unsigned
+          path: |
+            dist/PeakCut-Setup.exe
+            dist/PeakCut-Windows.zip
+
+  # Signing. Turn it on after SignPath approves the project: in the repository settings add the variables
+  # SIGNPATH_ENABLED=true, SIGNPATH_ORGANIZATION_ID, SIGNPATH_PROJECT_SLUG, SIGNPATH_POLICY_SLUG and the secret
+  # SIGNPATH_API_TOKEN. Every signing request still waits for the project's approver in SignPath.
+  sign:
+    needs: build
+    if: ${{ vars.SIGNPATH_ENABLED == 'true' }}
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_POLICY_SLUG }}
+          github-artifact-id: ${{ needs.build.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: signed
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PeakCut-signed
+          path: signed
