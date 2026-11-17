@@ -35,3 +35,6 @@ build/
 dist/
 *.spec
 !PeakCut-Setup-and-Run.bat
+
+# ---- Vercel link (this computer only)
+.vercel/
