@@ -279,6 +279,21 @@ Clip videos you made, or have permission to use. You are responsible for the rig
 post, and for following the terms of the sites you fetch from and post to. Game footage and trailers often belong to
 the publisher, so check their content policy before you post clips.
 
+## Code signing policy
+
+Free code signing provided by [SignPath.io](https://about.signpath.io/), certificate by
+[SignPath Foundation](https://signpath.org/). Signing applies to the Windows program and installer attached to each
+[release](https://github.com/Aniket886/Peak-Cut/releases), which are built from this repository by GitHub Actions
+(`.github/workflows/release.yml`).
+
+- **Committers and reviewers:** [Aniket886](https://github.com/Aniket886)
+- **Approvers:** [Aniket886](https://github.com/Aniket886). Every release is approved by hand before it is signed.
+
+**Privacy policy.** PeakCut sends information to other systems only as you direct it: the videos you ask it to
+download, the AI service you choose and give a key to, and the sites you connect for posting. On first start it
+downloads the speech model once from GitHub, and it can check GitHub for updates (set `PEAKCUT_UPDATE_CHECK=0` to turn
+that off). Its pages load the Geist font from Google Fonts, which sees your IP address. Your videos, clips and settings stay on your computer. PeakCut does not collect analytics.
+
 ## License
 
 PeakCut is created and maintained by [Aniket886](https://github.com/Aniket886) and released under the
