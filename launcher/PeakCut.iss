@@ -23,6 +23,7 @@ Compression=lzma2
 SolidCompression=yes
 OutputDir=..\dist
 OutputBaseFilename=PeakCut-Setup
+SetupIconFile=peakcut.ico
 UninstallDisplayName={#AppName}
 UninstallDisplayIcon={app}\PeakCut.exe
 WizardStyle=modern
