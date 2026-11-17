@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PeakCut: turn long videos into clips</title>
+<meta name="description" content="PeakCut finds the best moments in long videos and cuts them into captioned clips. It runs on your own computer.">
+<link rel="icon" href="favicon.svg">
+<style>
+:root{--brand:#2F6BFF;--brand-hi:#5A8AFF;--ink:#0E1726;--soft:#EEF3FF;--line:#E8EBF0;--dim:#5A6577;--bg:#fff;--muted:#F5F7FA}
+@media (prefers-color-scheme:dark){:root{--ink:#F2F5FA;--soft:#16203A;--line:#222C40;--dim:#9AA5B8;--bg:#0B111D;--muted:#111827}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header{padding:20px 0}
+header img{height:30px}
+h1{font-size:clamp(32px,6vw,52px);line-height:1.1;margin:48px 0 16px;letter-spacing:-.02em}
+.lead{font-size:19px;color:var(--dim);max-width:600px}
+.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;padding:14px 26px;border-radius:8px;margin:28px 0 8px}
+.btn:hover{background:var(--brand-hi)}
+.note{color:var(--dim);font-size:14px}
+.hero{width:100%;border-radius:12px;border:1px solid var(--line);margin:40px 0}
+h2{font-size:24px;margin:56px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--muted);border:1px solid var(--line);border-radius:10px;padding:18px}
+.card b{display:block;margin-bottom:4px}
+.card span{color:var(--dim);font-size:15px}
+ol{padding-left:20px}li{margin:8px 0}
+code{background:var(--soft);padding:2px 6px;border-radius:4px;font-size:14px}
+footer{margin:64px 0 32px;padding-top:20px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+a{color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><img src="logo.svg" alt="PeakCut"></header>
+<h1>Long videos in.<br>Ready-to-post clips out.</h1>
+<p class="lead">PeakCut finds the best moments in a video or a live stream, then cuts them into captioned vertical clips. It runs on your own computer, so your videos stay with you.</p>
+<a class="btn" id="dl" href="https://github.com/Aniket886/Peak-Cut/releases/latest/download/PeakCut-Windows.zip">Download for Windows</a>
+<div class="note">Free. About 230 MB. Windows 10 or 11, 64-bit.</div>
+<img class="hero" src="demo-hype.jpg" alt="A clip made by PeakCut with word-by-word captions">
+
+<h2>Why run it on your computer</h2>
+<div class="grid">
+<div class="card"><b>Your videos stay private</b><span>Nothing is uploaded to a PeakCut server. Videos and clips are saved on your own disk.</span></div>
+<div class="card"><b>No sign-up</b><span>Open it and start. There is no account and no monthly fee.</span></div>
+<div class="card"><b>Your own AI key</b><span>Use Gemini, OpenAI, Groq, or a local Ollama model. You pay your AI provider directly, if at all.</span></div>
+</div>
+
+<h2>Get started</h2>
+<ol>
+<li>Download the zip above and extract it anywhere (right-click, Extract All).</li>
+<li>Open the <code>PeakCut</code> folder and double-click <code>PeakCut.exe</code>. If Windows shows a blue warning, choose <b>More info</b>, then <b>Run anyway</b>.</li>
+<li>The first start downloads the speech model (about 480 MB). After that, PeakCut opens in your browser.</li>
+<li>In <b>Settings, AI</b>, paste your AI key. Then paste a YouTube link or upload a video.</li>
+</ol>
+<p class="note">Keep the black window open while you use PeakCut. Close it to stop. Your clips are saved in <code>%LOCALAPPDATA%\PeakCut\data</code>.</p>
+
+<h2>Good to know</h2>
+<ul>
+<li>Clipping uses your processor. A computer with 4 or more cores and 8 GB of RAM works best.</li>
+<li>The Windows warning appears because the program is not code-signed yet. The source code is open, so you can read it or build it yourself.</li>
+<li>Prefer to run it on a server for a team? See the <a href="https://github.com/Aniket886/Peak-Cut">source and server guide</a>.</li>
+</ul>
+
+<footer>PeakCut is open source. <a href="https://github.com/Aniket886/Peak-Cut">View on GitHub</a></footer>
+</div>
+</body>
+</html>
